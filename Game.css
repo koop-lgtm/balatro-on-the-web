@@ -1,0 +1,440 @@
+/* 基础样式 */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* PC端样式 */
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.game-frame-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000;
+}
+
+#game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #000;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(24,26,27,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 2rem;
+    width: 80%;
+    max-width: 400px;
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 0 1.5rem 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+.play-button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 1.2rem 3.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+.play-button.ready {
+    cursor: pointer;
+    opacity: 1;
+    animation: pulse 2s infinite;
+}
+
+.play-button.ready:hover {
+    transform: scale(1.05);
+    background: #ff7b1a;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    #mobile-game-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #000;
+    }
+
+    #game-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .mobile-loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .mobile-loading .loading-text {
+        font-size: 1.2rem;
+    }
+
+    .mobile-loading .progress-bar-container {
+        width: 200px;
+    }
+}
+
+/* 错误消息样式 */
+.error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    z-index: 2000;
+}
+
+.game-detail {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* PC端游戏容器 */
+.desktop-game-container {
+    width: 100%;
+    max-width: 1164px;
+    margin: 0 auto 20px;
+    position: relative;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-game-frame {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+}
+
+/* 移动端游戏容器 */
+.mobile-game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+}
+
+.mobile-game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.back-to-details {
+    position: fixed;
+    top: var(--header-height);
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    transform: translateY(-50%);
+    transition: background 0.3s ease;
+}
+
+.back-to-details:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.back-to-details-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.back-arrow-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.fav-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+}
+
+/* 游戏描述 */
+.game-description {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.breadcrumb {
+    margin-bottom: 0.7rem;
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    font-weight: 700;
+}
+
+.breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    margin: 0 0.2em;
+}
+
+.game-title-whiteboard {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0.1em 0 0.3em 0;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+/* 评分信息样式 */
+.game-rating-info {
+    margin: 15px 0;
+}
+
+.rating-stats {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.stat-item i {
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 描述和说明文本样式 */
+.mod-text {
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+.desc-text,
+.game-howtoplay {
+    margin-bottom: 20px;
+}
+
+.desc-text:last-child,
+.game-howtoplay:last-child {
+    margin-bottom: 0;
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+    .game-detail {
+        padding: 0;
+    }
+
+    .desktop-game-container {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .game-description {
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .game-title-whiteboard {
+        font-size: 1.8rem;
+    }
+
+    .game-howtoplay h2 {
+        font-size: 1.2rem;
+    }
+
+    .game-howtoplay p {
+        font-size: 0.9rem;
+    }
+
+    .rating-stats {
+        gap: 16px;
+    }
+
+    .stat-item i {
+        font-size: 16px;
+    }
+
+    .stat-value {
+        font-size: 14px;
+    }
+}
+
+/* 移动端横屏样式 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .game-description {
+        width: 314px;
+        padding: 1rem;
+        margin: 0.5rem auto;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+} 
