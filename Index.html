@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7161786823522141" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4P7JYDJT22"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4P7JYDJT22');
+        // Heartbeat tracking
+        let minutesOnPage = 0;
+        setInterval(() => {
+            minutesOnPage += 1;
+            gtag('event', 'heartbeat_minute', {
+                event_category: 'engagement',
+                event_label: 'Stay Duration',
+                value: minutesOnPage
+            });
+            console.log(`Heartbeat sent: ${minutesOnPage} min`);
+        }, 60000); // 每 60 秒一次
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balatro Online | Play Balatro Online for Free</title>
+    <link rel="stylesheet" href="balatro-style.css">
+    <meta name="description" content="Play Balatro Online for free – experience this chaotic roguelike deck-builder directly in your browser! Build unstoppable combos with Joker, Tarot, and Planet cards. No downloads needed. Enjoy Balatro Online now!">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="/components/header.js"></script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="balatro online, balatro web, online balatro, play balatro online, balatro no download, Balatro, card game, poker, Joker cards">
+    <meta name="author" content="Free Online Games">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Balatro | Free Online Games">
+    <meta property="og:description" content="Play Balatro Online for free – experience this chaotic roguelike deck-builder directly in your browser! Build unstoppable combos with Joker, Tarot, and Planet cards. No downloads needed. Enjoy Balatro Online now!">
+    <meta property="og:image" content="balatro.png">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Balatro | Free Online Games">
+    <meta name="twitter:description" content="Play Balatro Online for free – experience this chaotic roguelike deck-builder directly in your browser! Build unstoppable combos with Joker, Tarot, and Planet cards. No downloads needed. Enjoy Balatro Online now!">
+    <meta name="twitter:image" content="balatro.png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- 添加 Toast 元素 -->
+    <div id="toast" class="toast"></div>
+
+    <div class="game-detail">
+        <div id="pcGameEntry" style="display:none">
+            <div class="desktop-game-container">
+                <iframe id="desktopGameFrame" class="desktop-game-frame" src="" allowfullscreen></iframe>
+                <div class="game-overlay" id="gameOverlay">
+                    <div class="loading-content">
+                        <div class="loading-text">Loading...</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="pcProgressBar" style="width: 0%"></div>
+                        </div>
+                        <button class="play-button ready" id="playNowBtn">Play Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-modal" id="feedbackModal">
+                <div class="feedback-modal-content">
+                    <h3>Game Feedback</h3>
+                    <textarea id="feedbackText" placeholder="Please enter your feedback..."></textarea>
+                    <div class="feedback-modal-buttons">
+                        <button class="cancel-feedback" onclick="hideFeedbackModal()">Cancel</button>
+                        <button class="submit-feedback" onclick="submitFeedback()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端游戏预览 -->
+        <div id="mobileGameEntry" style="display:none" class="game-preview">
+            <div class="detail-thumbnail-container">
+                <img src="balatro.webp" alt="Balatro" class="detail-game-thumbnail">
+                <button class="play-now-btn" onclick="startGame()">Play Now</button>
+            </div>
+        </div>
+
+        <!-- 游戏容器 -->
+        <div id="mobileGameView" class="mobile-game-view">
+            <div id="mobileGameOverlay" class="mobile-game-overlay">
+                <div class="loading-content">
+                    <div class="loading-text">Loading game...</div>
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <button id="backButton" class="back-to-details" onclick="exitGame()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </button>
+            <iframe 
+                src="https://game.randplays.com/balatro-online/index.html?v=1"
+                class="mobile-game-frame"
+                allow="fullscreen; autoplay; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture"
+                sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads allow-top-navigation"
+                referrerPolicy="origin"
+                loading="eager"
+                >
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Game Description Section -->
+    <section class="game-description">
+        <div class="description-content">
+            <div class="description-section">
+                <h2>Welcome to Balatro Online</h2>
+                <p class="intro-text">Play Balatro Online for free – experience this chaotic roguelike deck-builder directly in your browser! Build unstoppable combos with Joker, Tarot, and Planet cards. No downloads needed. Enjoy Balatro Online now! Whether you're on your computer or mobile device, jump right into the action and experience this addictive card game masterpiece. Made by an independent modder.</p>
+                
+                <div class="description-section">
+                    <h3>🎮 Unique Gameplay</h3>
+                    <p>Balatro isn't just another poker game - it's a thrilling fusion of traditional poker and roguelike elements. Build your deck, collect powerful jokers, and create incredible combinations that would make any poker player's jaw drop. Each run is unique, with procedurally generated challenges and opportunities to create the perfect hand.</p>
+                </div>
+
+                <div class="description-section">
+                    <h3>🌟 Key Features</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>Strategic Deck Building</strong>
+                            Choose from various card types, each with unique abilities and modifiers
+                        </li>
+                        <li>
+                            <strong>Powerful Jokers</strong>
+                            Collect and combine special joker cards that can multiply your scores, transform cards, or create wild combinations
+                        </li>
+                        <li>
+                            <strong>Endless Possibilities</strong>
+                            With over 150 different cards and countless combinations, no two games are ever the same
+                        </li>
+                        <li>
+                            <strong>Progressive Challenge</strong>
+                            Face increasingly difficult opponents and challenges as you advance through the game
+                        </li>
+                        <li>
+                            <strong>Roguelike Elements</strong>
+                            Permanent upgrades, random events, and strategic choices that affect your entire run
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="description-section">
+                    <h3>🎯 Game Modes</h3>
+                    <p>Whether you're a casual player or a hardcore strategist, Balatro offers multiple ways to play:</p>
+                    <ul class="mode-list">
+                        <li><strong>Standard Mode:</strong> Perfect for beginners, learn the basics and build your strategy</li>
+                        <li><strong>Challenge Mode:</strong> Test your skills with special rules and restrictions</li>
+                        <li><strong>Daily Challenges:</strong> New puzzles and scenarios every day</li>
+                        <li><strong>Custom Games:</strong> Create your own rules and share with friends</li>
+                    </ul>
+                </div>
+
+                <div class="description-section">
+                    <h3>💡 Why Players Love Balatro</h3>
+                    <p>"Balatro is a masterpiece of game design that takes the familiar concept of poker and turns it into something entirely new. The combination of strategy, luck, and deck-building creates an addictive gameplay loop that keeps you coming back for more. Every run feels fresh and exciting, and the satisfaction of pulling off an incredible combination is unmatched."</p>
+                </div>
+
+                <div class="description-section">
+                    <h3>🎲 Getting Started</h3>
+                    <p>New to Balatro? Don't worry! The game features an intuitive tutorial that will guide you through the basics. Learn about card combinations, special abilities, and strategic tips to help you become a master player. Check out our <a href="how-to-play/index.html" class="text-link">How to Play</a> guide for detailed instructions and advanced strategies.</p>
+                </div>
+
+                <div class="cta-container">
+                    <a href="balatro-jokers/index.html" class="how-to-play-btn" style="margin-right: 20px;">List Of Jokers</a>
+                    <a href="mods/index.html" class="mods-btn">Explore Mods</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #fff; padding: 40px 0 20px; margin-top: 60px; border-top: 1px solid #eee;">
+        <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+            <div>
+                <h3 style="color: #333; font-size: 18px; margin-bottom: 15px;">About Balatro</h3>
+                <p style="color: #666; font-size: 14px; line-height: 1.6;">Balatro is a unique blend of poker and roguelike deck-building, offering endless replayability and strategic depth. Play now and experience the next evolution in card games!</p>
+            </div>
+            <div>
+                <h3 style="color: #333; font-size: 18px; margin-bottom: 15px;">Quick Links</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;"><a href="/how-to-play" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">How to Play</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/mods" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">Game Mods</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/faq" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #333; font-size: 18px; margin-bottom: 15px;">Legal & Contact</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;"><a href="/privacy" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">Privacy Policy</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/terms" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">Terms of Service</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/contact" style="color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s;">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1100px; margin: 30px auto 0; padding: 20px 20px 0; text-align: center; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px;">&copy; 2025 Balatro Online. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- PC端反馈弹窗 -->
+    <div class="feedback-modal" id="feedbackModal">
+        <div class="feedback-modal-content">
+            <h3>Game Feedback</h3>
+            <textarea id="feedbackText" placeholder="Please enter your feedback..."></textarea>
+            <div class="feedback-modal-buttons">
+                <button class="cancel-feedback" onclick="hideFeedbackModal()">Cancel</button>
+                <button class="submit-feedback" onclick="submitFeedback()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 手机端反馈弹窗 -->
+    <div class="mobile-feedback-modal" id="mobileFeedbackModal">
+        <div class="mobile-feedback-modal-content">
+            <h3>Game Feedback</h3>
+            <textarea id="mobileFeedbackText" placeholder="Please enter your feedback..."></textarea>
+            <div class="mobile-feedback-modal-buttons">
+                <button class="cancel-feedback" onclick="hideMobileFeedbackModal()">Cancel</button>
+                <button class="submit-feedback" onclick="submitMobileFeedback()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isDragging = false;
+        let startY = 0;
+        let currentY = 80;
+        const backButton = document.getElementById('backButton');
+        const fullscreenButton = document.getElementById('fullscreenButton');
+
+        // 显示 Toast 提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            if (!toast) {
+                console.error('Toast element not found');
+                return;
+            }
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            // 确保之前的定时器被清除
+            if (window.toastTimeout) {
+                clearTimeout(window.toastTimeout);
+            }
+            
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // 发送反馈
+        async function sendFeedback(action) {
+            try {
+                const response = await fetch('http://localhost:3005/newapi/log', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Forwarded-For': window.location.hostname
+                    },
+                    body: JSON.stringify({
+                        action: action,
+                        value: ''
+                    })
+                });
+
+                if (response.ok) {
+                    const message = action === 'like' ? 'Thanks for liking!' : 'Thanks for your feedback!';
+                    showToast(message);
+                } else {
+                    showToast('Failed to send feedback. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error sending feedback:', error);
+                showToast('Failed to send feedback. Please try again.');
+            }
+        }
+
+        // 显示反馈模态框
+        function showFeedbackModal() {
+            if (isMobileDevice()) {
+                const modal = document.getElementById('mobileFeedbackModal');
+                modal.style.display = 'flex';
+                document.getElementById('mobileFeedbackText').focus();
+            } else {
+                const modal = document.getElementById('feedbackModal');
+                modal.style.display = 'flex';
+                document.getElementById('feedbackText').focus();
+            }
+        }
+
+        // 隐藏反馈模态框
+        function hideFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            modal.style.display = 'none';
+            document.getElementById('feedbackText').value = '';
+        }
+
+        function hideMobileFeedbackModal() {
+            const modal = document.getElementById('mobileFeedbackModal');
+            modal.style.display = 'none';
+            document.getElementById('mobileFeedbackText').value = '';
+        }
+
+        // 提交反馈
+        async function submitFeedback() {
+            const feedbackText = document.getElementById('feedbackText').value.trim();
+            if (!feedbackText) {
+                alert('Please enter your feedback');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3005/newapi/log', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Forwarded-For': window.location.hostname
+                    },
+                    body: JSON.stringify({
+                        action: 'feedback',
+                        value: feedbackText
+                    })
+                });
+
+                if (response.ok) {
+                    hideFeedbackModal();
+                    showToast('Thank you for your feedback!');
+                }
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                showToast('Failed to submit feedback. Please try again.');
+            }
+        }
+
+        async function submitMobileFeedback() {
+            const feedbackText = document.getElementById('mobileFeedbackText').value.trim();
+            if (!feedbackText) {
+                alert('Please enter your feedback');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3005/newapi/log', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Forwarded-For': window.location.hostname
+                    },
+                    body: JSON.stringify({
+                        action: 'feedback',
+                        value: feedbackText
+                    })
+                });
+
+                if (response.ok) {
+                    hideMobileFeedbackModal();
+                    showToast('Thank you for your feedback!');
+                }
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                showToast('Failed to submit feedback. Please try again.');
+            }
+        }
+
+        // 点击模态框外部关闭
+        document.getElementById('feedbackModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                hideFeedbackModal();
+            }
+        });
+
+        document.getElementById('mobileFeedbackModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                hideMobileFeedbackModal();
+            }
+        });
+
+        // 按ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (isMobileDevice()) {
+                    hideMobileFeedbackModal();
+                } else {
+                    hideFeedbackModal();
+                }
+            }
+        });
+
+        // 开始游戏
+        async function startGame() {
+            const mobileGameView = document.getElementById('mobileGameView');
+            const mobileGameOverlay = document.getElementById('mobileGameOverlay');
+            const progressBar = document.getElementById('progressBar');
+            
+            // 显示游戏容器并立即进入全屏
+            mobileGameView.style.display = 'block';
+
+            // 自动全屏
+            var gamelayout = "landscape";
+            const el = document.documentElement;
+            if (el.requestFullscreen) {
+                el.requestFullscreen().then(() => {
+                // 屏幕方向控制
+                const orientation = (window.screen.orientation || (window.screen).msOrientation || (window.screen).mozOrientation);
+                
+                if (orientation && orientation.lock) {
+                    if (gamelayout === 'landscape') {
+                        orientation.lock('landscape').catch(() => {});
+                    } else if (gamelayout === 'portrait' || gamelayout === 'auto' || !gamelayout) {
+                        orientation.lock('portrait').catch(() => {});
+                    }
+                }
+                }).catch(error => {
+                    console.log('Fullscreen request failed:', error);
+                });
+            }
+
+            if (!document.fullscreenElement) {
+                try {
+                    await document.documentElement.requestFullscreen({
+                        navigationUI: 'hide'
+                    });
+                } catch (error) {
+                    console.log('Fullscreen request failed:', error);
+                }
+            }
+            
+            // 模拟加载进度
+            let startTime = Date.now();
+            const duration = 3000; // 3秒
+            
+            const updateProgress = () => {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min((elapsed / duration) * 100, 100);
+                
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress < 100) {
+                    requestAnimationFrame(updateProgress);
+                } else {
+                    mobileGameOverlay.style.display = 'none';
+                }
+            };
+            
+            requestAnimationFrame(updateProgress);
+
+        }
+
+        // 退出游戏
+        function exitGame() {
+            const mobileGameView = document.getElementById('mobileGameView');
+            const mobileGameOverlay = document.getElementById('mobileGameOverlay');
+            
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+            // 恢复竖屏
+            const orientation = (window.screen.orientation || (window.screen ).msOrientation || (window.screen).mozOrientation);
+            if (orientation && orientation.lock) {
+                orientation.lock('portrait').catch(() => {});
+            }
+            
+            // 隐藏游戏视图，但保留iframe
+            mobileGameView.style.display = 'none';
+        }
+
+        // 监听全屏变化
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+        function handleFullscreenChange() {
+            const mobileGameView = document.getElementById('mobileGameView');
+            if (!document.fullscreenElement && 
+                !document.webkitFullscreenElement && 
+                !document.mozFullScreenElement && 
+                !document.msFullscreenElement) {
+                // 如果退出全屏，也退出游戏视图
+                exitGame();
+            }
+        }
+
+        // 判断 PC/移动端
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent);
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!isMobileDevice()) {
+                document.getElementById('pcGameEntry').style.display = '';
+                document.getElementById('mobileGameEntry').style.display = 'none';
+                document.getElementById('mobileGameView').style.display = 'none';
+                // 自动开始加载PC端游戏
+                var frame = document.getElementById('desktopGameFrame');
+                var overlay = document.getElementById('gameOverlay');
+                var progressBar = document.getElementById('pcProgressBar');
+                frame.src = 'https://game.randplays.com/balatro-online/index.html?v=1';
+                overlay.style.display = 'flex';
+                progressBar.style.width = '0%';
+                let startTime = Date.now();
+                const duration = 3000; // 改为3秒
+                function updateProgress() {
+                    const currentTime = Date.now();
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min((elapsed / duration) * 100, 100);
+                    progressBar.style.width = progress + '%';
+                    if (progress < 100) {
+                        requestAnimationFrame(updateProgress);
+                    } else {
+                        overlay.style.display = 'none';
+                    }
+                }
+                requestAnimationFrame(updateProgress);
+            } else {
+                document.getElementById('pcGameEntry').style.display = 'none';
+                document.getElementById('mobileGameEntry').style.display = '';
+                document.getElementById('mobileGameView').style.display = 'none';
+            }
+        });
+    </script>
+        <div class="ad-popup-root">
+        <div id="adPopup" class="ad-popup">
+            <div class="ad-content">
+                <div class="ad-content">    </div>
+                <div class="countdown" id="countdown">10 秒后自动关闭</div>
+                <button id="close-btn" class="close-btn" onclick="closeAdPopup()">Close</button>
+            </div>
+        </div>
+        </div>
+        <script>
+            let lastAdShownTime = 0; // 上次广告展示时间（初始为0）
+             window.addEventListener("message", function(event) {
+                // console.log("收到 iframe 消息：", event.data);
+                // 你可以根据消息类型做不同的处理
+                if (event.data.type === 'adcall') {
+
+                    const now = Date.now();
+                    const interval = now - lastAdShownTime;
+
+                    if (interval >= 2 * 60 * 1000) { // 180秒（3分钟）
+                        lastAdShownTime = now;
+                        showAdPopup();
+                    } else {
+                        console.log(`广告间隔未满足（已过 ${Math.floor(interval / 1000)} 秒）`);
+                    }
+                }
+            });
+            let countdownTimer;
+            function showAdPopup() {
+                document.getElementById('adPopup').style.display = 'flex';
+               
+                // 插入广告代码
+                const adContainer = document.querySelector('#adPopup .ad-content .ad-content');
+                adContainer.innerHTML = ''; // 清空旧广告（避免多次插入）
+
+                const ins = document.createElement('ins');
+                ins.className = 'adsbygoogle';
+                ins.style.display = 'block';
+                ins.style.width = '400px';
+                ins.style.height = '300px';
+                ins.setAttribute('data-ad-client', 'ca-pub-7161786823522141');
+                ins.setAttribute('data-ad-slot', '3106108046');
+                ins.setAttribute('data-ad-format', 'auto');
+                ins.setAttribute('data-full-width-responsive', 'true'); // 固定尺寸广告建议设为 false
+
+                adContainer.appendChild(ins);
+
+                // 调用 adsbygoogle 显示广告
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.warn('Adsense push error:', e);
+                }
+
+                // document.getElementById('adPopup').style.height = "100%";
+
+                document.getElementById('adPopup').style.setProperty('height', '100%', 'important');
+                let seconds = 10;
+                const countdownEl = document.getElementById('countdown');
+                countdownEl.innerText = '' ; // `${seconds} 秒后自动关闭`;
+
+                document.getElementById('close-btn').innerText = seconds + ' seconds to close';
+                countdownTimer = setInterval(() => {
+                    seconds--;
+                    if (seconds <= 0) {
+                        // closeAdPopup();
+                        document.getElementById('close-btn').innerText = 'Close';
+                    } else {
+                        // countdownEl.innerText = `${seconds} 秒后自动关闭`;
+                        document.getElementById('close-btn').innerText = seconds + ' seconds to close';
+                    }
+                }, 1000);
+            }
+
+            function closeAdPopup() {
+                if (document.getElementById('close-btn').innerText ==='Close') {
+                    clearInterval(countdownTimer);
+                    document.getElementById('adPopup').style.display = 'none';
+                }
+                
+
+            }
+        </script>
+</body>
+</html> 
